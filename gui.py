@@ -1,22 +1,39 @@
 from tkinter import *
-
-
-def raise_frame(frame):
-    frame.tkraise()
+from file_name_change import *
 
 root = Tk()
 
-f1 = Frame(root)
-f2 = Frame(root)
+def nameChange(directory, name, ext):
+    dsa = ChangeFileName(directory, name, ext)
 
-for frame in (f1, f2):
-    frame.grid(row=0, column=0, sticky='news')
 
-Button(f1, text='Go to frame 2', command=lambda:raise_frame(f2)).pack()
-Label(f1, text='FRAME 1').pack()
+directoryLabel = Label(root, text = 'File Directory:')
+newNameLabel = Label(root, text = 'File Name:')
+label = Label(root)
 
-Label(f2, text='FRAME 2').pack()
-Button(f2, text='Go to frame 3', command=lambda:raise_frame(f3)).pack()
+directoryEntry = Entry(root)
+newNameEntry = Entry(root)
 
-raise_frame(f1)
+startButton = Button(root, text = 'Start Name change', command= lambda: nameChange(directoryEntry.get(), newNameEntry.get(), extintions.get()))
+
+extintions = StringVar(value=".mp3")
+
+mp3Radio = Radiobutton(root, text="mp3", variable=extintions, value=".mp3")
+mp4Radio = Radiobutton(root, text="mp4", variable=extintions, value=".mp4")
+jpgRadio = Radiobutton(root, text="mkv", variable=extintions, value=".mkv", )
+
+directoryLabel.grid(row = 0, column = 0, pady = 2)
+directoryEntry.grid(row = 0, column = 1, pady = 2)
+
+newNameLabel.grid(row = 1, column = 0, pady = 2)
+newNameEntry.grid(row = 1, column = 1, pady = 2)
+
+mp3Radio.grid(row = 0, column = 3, pady = 2)
+mp4Radio.grid(row = 1, column = 3, pady = 2)
+jpgRadio.grid(row = 2, column = 3, pady = 2)
+
+label.grid(row = 2, column = 0, columnspan = 2, pady = 2)
+
+startButton.grid(row = 3, column = 1, pady = 2)
+
 root.mainloop()
